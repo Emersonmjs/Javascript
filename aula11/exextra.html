@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacionalidade</title>
+</head>
+<body>
+    <h1>Descobrindo nacionalidade</h1>
+    <input type="text" name="txtnac" id="txtnac">
+    <input type="button" value="botao" onclick="pais()">
+    <div id="nacionalidade"></div>
+
+    <script>
+        function pais(){
+            var lugar = document.querySelector('input#txtnac').value;
+            document.write(`Vivendo em ${lugar}<br>`)
+            if (lugar != 'Brasil') {
+                document.write('Você é Estrangeiro')
+            } else {
+                document.write('Você é Brasileiro')
+            }
+        }
+    </script>
+</body>
+</html>

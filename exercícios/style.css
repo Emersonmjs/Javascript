@@ -1,0 +1,38 @@
+* {
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    margin: 20px auto;
+}
+
+header > h1{
+    text-align: center;
+}
+
+section{
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 340px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.089);
+}
+
+section > h2 {
+    padding: 10px;
+    text-align: center;
+}
+section > img{
+    display: block;
+    margin: 0px auto;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+}
+
+footer{
+    text-align: center;
+    margin-top: 15px;
+}
