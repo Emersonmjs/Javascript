@@ -1,0 +1,12 @@
+
+html{
+    height: 100vh;
+    width: 100vw;
+}
+body{
+    background-size: 750px 750px, 500px 500px;
+    background-image: radial-gradient(#FCFC98, transparent 70%), radial-gradient(#FAFBAB, transparent 70%);
+    background-position: 850px -350px, -250px 450px;
+    background-repeat: no-repeat, no-repeat;
+    background-color: #F8FCCA;
+}
