@@ -1,6 +1,9 @@
-function subtracao(n1=0, n2=0){
-    let res = n1 - n2
-    return res
+function soma(...valores){
+    let somaValroes = 0
+    for (let i of valores){
+        somaValroes += i
+    }
+    return somaValroes
 }
 
-console.log(subtracao(10, 5))
+console.log(soma(5,10,20,60))
