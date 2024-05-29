@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section{
+    width: 430px;
+}
+
+#saida{
+    height: 50px;
+    border-radius: 5px;
+    margin: 2px;
+    padding: 0 5px;
+    font-size: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.212);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+section > h1{
+    font-size: 2em;
+}
+
+.tecla, .operacoes, #igualdade, #copy{
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    margin: 4px 2px;
+    border-radius: 7px;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.operacoes, #igualdade, #copy{
+    background-color: rgba(206, 205, 205, 0.842);
+}
+
+.tecla:hover, .operacoes:hover, #copy:hover{
+    background-color: rgba(17, 0, 255, 0.301);
+}
+.tecla:active, .operacoes:active, #copy:active{
+    background-color: rgba(17, 0, 255, 0.651);
+    color: white;
+}
