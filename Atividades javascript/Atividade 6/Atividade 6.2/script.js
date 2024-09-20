@@ -1,6 +1,6 @@
 const listaProdutos = document.querySelector("#lista-produtos")
 const busca = document.querySelector("#busca")
-
+busca.focus()
 let produtos = [
     {
         nome: "Placa mãe",
@@ -36,27 +36,35 @@ let produtos = [
     }
 
 ]
-function criarProduto(){
-    for(let i = 0; i < produtos.length; i++){
-        const produto = document.createElement("li")
-        produto.innerHTML = `
-        Nome: ${produtos[i].nome}<br>
-        Preço: ${produtos[i].preco}<br><hr>`
-        console.log(produto)
-        return produto
-    }
+
+let texto = ""
+
+function removerAcentos(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-listaProdutos.appendChild(criarProduto())
+function mostrarProdutos(array){
 
-let conteudo = ""
-busca.addEventListener("input", (event)=>{
-    conteudo += event.data
-    for(let i = 0; i < produtos.length; i++){
-        if(conteudo.toUpperCase() === produtos[i].nome.toUpperCase()){
-            const produto = criarProduto()
-            listaProdutos.appendChild(produto)
-        }
-    }
+    listaProdutos.innerHTML = ""
+
+    array.forEach((elemento)=>{
+        const produto = document.createElement("li")
+        produto.innerHTML = `
+        Nome: ${elemento.nome}<br>
+        Preço: ${elemento.preco}<br><hr>`
+        listaProdutos.appendChild(produto)
+    })
+}
+
+mostrarProdutos(produtos)
+
+function filtrarProdutos(event){
+    texto = removerAcentos(event.target.value.toLowerCase())
+    const arrayFiltrado = produtos.filter((elemento)=>{
+        return removerAcentos(elemento.nome.toLowerCase()).includes(texto)
+    })
     
-})
+    mostrarProdutos(arrayFiltrado)
+}
+
+busca.addEventListener("input", filtrarProdutos)
