@@ -46,19 +46,22 @@ function mostrarLivros(array){
 
 mostrarLivros(livros)
 
-function filtrarLivros(event){
+function campoSelecionado(array, campo, valor){
+    const parteSelecionada = valor.toLowerCase()
+
+    return array.filter((elemento)=>{
+        return parteSelecionada === "todos" || elemento[campo].toLowerCase() === parteSelecionada
+    })
+}
+
+function filtrarLivros(){
     const generoSelecionado = genero.value.toLowerCase()
     const autorSelecionado = autor.value.toLowerCase()
-    console.log(generoSelecionado)
-    console.log(autorSelecionado)
-    livroEspecifico = event.target.value.toLowerCase()
-    const livrosFiltrados = livros.filter((elemento)=>{
-        const filtroGenero = generoSelecionado === "todos" || elemento.genero.toLowerCase() === generoSelecionado
-        console.log(filtroGenero)
-        const filtroAutor = autorSelecionado === "todos" || elemento.autor.toLowerCase() === autorSelecionado
-        console.log(filtroAutor)
-        return filtroGenero && filtroAutor
-    })
+
+    let livrosFiltrados = campoSelecionado(livros, "genero", generoSelecionado)
+
+    livrosFiltrados = campoSelecionado(livrosFiltrados, "autor", autorSelecionado)
+
     mostrarLivros(livrosFiltrados)
 }
     
