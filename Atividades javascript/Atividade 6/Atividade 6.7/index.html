@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            margin-right: 10px;
+        }
+        select, input {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Livros</h1>
+
+    <div>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" placeholder="Digite o título">
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" placeholder="Digite o autor">
+
+        <label for="ano">Ano de Lançamento:</label>
+        <select id="ano">
+            <option value="todos">Todos</option>
+            <option value="antes2000">Antes de 2000</option>
+            <option value="2000-2010">2000-2010</option>
+            <option value="depois2010">Depois de 2010</option>
+        </select>
+    </div>
+
+    <ul id="lista-livros"></ul>
+
+   <script src="script.js"></script>
+
+</body>
+</html>
