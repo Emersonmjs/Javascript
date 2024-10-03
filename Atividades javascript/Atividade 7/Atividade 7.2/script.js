@@ -85,35 +85,72 @@ function mostrarFilmesPorClassificacao(classificacao, array, campo, valor){
     mostrarFilmes(classificacao, filtroUniversal(array, campo, valor))   
 }
 
-function mostrarClassificacoes(array){
-    mostrarFilmesPorClassificacao(livreFilmes, array, "classificacao", "livre")
-    mostrarFilmesPorClassificacao(filmes12, array, "classificacao", "12")
-    mostrarFilmesPorClassificacao(filmes16, array, "classificacao", "16")
-    mostrarFilmesPorClassificacao(filmes18, array, "classificacao", "18")
+const lugares = [
+    {
+        classe: livreFilmes,
+        tipo: "livre"
+    },
+    {
+        classe: filmes12,
+        tipo: "12"
+    },
+    {
+        classe: filmes16,
+        tipo: "16"
+    },
+    {
+        classe: filmes18,
+        tipo: "18"
+    }
+]
+
+function filtroaleatorio(array, valor){
+    const resultado = array.find((elemento)=>{
+            return elemento.tipo === valor
+        })
+    return resultado ? resultado.classe: null;
 }
 
-mostrarClassificacoes(filmes)
+console.log(filtroaleatorio(lugares, "12"))
+
+function mostrarClassificacoes(array, valor){
+    const lugar = filtroaleatorio(lugares, valor)
+    if(lugar){
+        mostrarFilmesPorClassificacao(lugar, array, "classificacao", valor)
+    }
+    
+}
+
+function classificacoesMostradas(array){
+    mostrarClassificacoes(array, "livre")
+    mostrarClassificacoes(array, "12")
+    mostrarClassificacoes(array, "16")
+    mostrarClassificacoes(array, "18")
+}
+
+classificacoesMostradas(filmes)
+
 
 function ordemFilmes(array, campo){
-    if(campo === "classificacao"){
-        if(ordem.value === "crescente"){
-            return classificacoes
-        }
-        if(ordem.value === "decrescente"){
-            return classificacoes.reverse()
-        }
-    }else{
-        return array.sort((atual, posterior)=>{
+    return array.sort((atual, posterior)=>{
+        if(typeof atual[campo] === "string"){
             if(ordem.value === "crescente"){
                 return atual[campo].localeCompare(posterior[campo])
             } else if(ordem.value === "decrescente"){
                 return posterior[campo].localeCompare(atual[campo])
             }
-            
-        })
-    }
-    
+        } else {
+            // Ordenação numérica para campos como ano
+            if(ordem.value === "crescente"){
+                return Number(atual[campo]) - Number(posterior[campo])
+            } else if(ordem.value === "decrescente"){
+                return Number(posterior[campo]) - Number(atual[campo])
+            }
+        }
+        
+    })
 }
+    
 
 function filtroFilmes(){
     let filmesFiltrados = filmes
@@ -122,12 +159,76 @@ function filtroFilmes(){
     filmesFiltrados = filtroUniversal(filmesFiltrados, "classificacao", classificacao.value.toLowerCase())
     filmesFiltrados = filtroUniversal(filmesFiltrados, "ano", ano.value.toLowerCase())
     filmesFiltrados = ordemFilmes(filmesFiltrados, ordenarPor.value)
-    
-    mostrarClassificacoes(filmesFiltrados)
+    if(classificacao.value.toLowerCase() === "todos"){
+        classificacoesMostradas(filmesFiltrados)
+    }else{
+        mostrarClassificacoes(filmesFiltrados, classificacao.value.toLowerCase())
+    }
 }
+
 buscaTitulo.addEventListener("input", filtroFilmes)
 genero.addEventListener("change", filtroFilmes)
-classificacao.addEventListener("change", filtroFilmes)
+classificacao.addEventListener("change", ()=>{
+    if(classificacao.value.toLowerCase() === "todos"){
+        classificacoes.innerHTML = ""
+        arrayClassificacoes.forEach((elemento)=>{
+            console.log(elemento)
+            classificacoes.appendChild(elemento)
+        })
+    }else{
+        classificacoes.innerHTML = ""
+        console.log(arrayClassificacoes)
+        let classificacaoSelecionada = lugares.find((elemento)=>{
+            return elemento.tipo === classificacao.value.toLowerCase()
+        })
+        classificacaoSelecionada = classificacaoSelecionada? classificacaoSelecionada.classe.parentElement: null;
+        console.log(classificacaoSelecionada.children)
+        classificacoes.appendChild(classificacaoSelecionada)
+    }
+    filtroFilmes()
+})
 ano.addEventListener("change", filtroFilmes)
-ordenarPor.addEventListener("change", filtroFilmes)
-ordem.addEventListener("change", filtroFilmes)
+ordenarPor.addEventListener("change", ()=>{
+    // if(arrayClassificacoes[0].id === "class-filme-livre"){
+    //     console.log("Está correto!")
+    //     arrayClassificacoes.forEach((elemento)=>{
+    //         classificacoes.appendChild(elemento)
+    //     })
+    // }else{
+    //     console.log("Está inverso")
+    //     arrayClassificacoes.reverse().forEach((elemento)=>{
+    //         classificacoes.appendChild(elemento)
+    //     })
+    // }
+    filtroFilmes()
+})
+ordem.addEventListener("change", ()=>{
+    if(ordem.value === "crescente" && ordenarPor.value === "classificacao"){
+        if(classificacao.value.toLowerCase() === "todos"){
+            classificacoes.innerHTML = ""
+            console.log(arrayClassificacoes)
+            console.log(classificacoes)
+            if(arrayClassificacoes[0].id === "class-filme-livre"){
+                console.log("Está correto!")
+                arrayClassificacoes.forEach((elemento)=>{
+                    classificacoes.appendChild(elemento)
+                })
+            }else{
+                console.log("Está inverso")
+                arrayClassificacoes.reverse().forEach((elemento)=>{
+                    classificacoes.appendChild(elemento)
+                })
+            }
+        }
+    }else{
+        if(classificacao.value.toLowerCase() === "todos"){
+            if(ordenarPor.value === "classificacao"){
+                classificacoes.innerHTML = ""
+                arrayClassificacoes.reverse().forEach((elemento)=>{
+                    classificacoes.appendChild(elemento)
+                })
+        }
+        
+    }
+    filtroFilmes()
+}})
