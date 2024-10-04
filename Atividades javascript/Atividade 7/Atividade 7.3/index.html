@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtragem e Ordenação de Filmes</title>
+</head>
+<body>
+    <h1>Filtrar e Ordenar Filmes</h1>
+
+    <!-- Campo de busca por título -->
+    <label for="busca-titulo">Buscar por título:</label>
+    <input type="text" id="busca-titulo">
+
+    <!-- Filtro de gênero -->
+    <label for="genero">Gênero:</label>
+    <select id="genero">
+        <option value="todos">Todos</option>
+        <option value="acao">Ação</option>
+        <option value="drama">Drama</option>
+        <option value="comedia">Comédia</option>
+        <option value="ficcao">Ficção</option>
+    </select>
+
+    <!-- Filtro de classificação -->
+    <label for="classificacao">Classificação:</label>
+    <select id="classificacao">
+        <option value="todos">Todas</option>
+        <option value="livre">Livre</option>
+        <option value="12">12+</option>
+        <option value="16">16+</option>
+        <option value="18">18+</option>
+    </select>
+
+    <!-- Filtro de ano -->
+    <label for="ano">Ano:</label>
+    <select id="ano">
+        <option value="todos">Todos</option>
+        <option value="antes2000">Antes de 2000</option>
+        <option value="2000-2010">2000-2010</option>
+        <option value="depois2010">Depois de 2010</option>
+    </select>
+
+    <!-- Campo para ordenação -->
+    <label for="ordenar-por">Ordenar por:</label>
+    <select id="ordenar-por">
+        <option value="titulo">Título</option>
+        <option value="ano">Ano</option>
+        <option value="classificacao">Classificação</option>
+    </select>
+
+    <!-- Ordem crescente/decrescente -->
+    <label for="ordem">Ordem:</label>
+    <select id="ordem">
+        <option value="crescente">Crescente</option>
+        <option value="decrescente">Decrescente</option>
+    </select>
+
+    <!-- Botão para aplicar filtros -->
+    <button id="aplicar-filtros">Aplicar Filtros</button>
+
+    <!-- Lista de filmes filtrados -->
+    <h2>Filmes Filtrados:</h2>
+    <ul id="lista-filmes"></ul>
+
+    <script src="script.js"></script> <!-- Conectar com seu arquivo JavaScript -->
+</body>
+</html>
