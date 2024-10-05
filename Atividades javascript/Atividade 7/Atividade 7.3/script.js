@@ -59,3 +59,40 @@ function mostrarFilmes({array, localExposicao}){
 
 mostrarFilmes({array: filmes, localExposicao: listaFilmes})
 
+function anoSelecionado(valor, elemento, campo){
+    const valorSelecionado = valor
+    console.log(valorSelecionado)
+    if(valorSelecionado === "antes2000"){
+        return Number(elemento[campo]) < 2000
+    } else if(valorSelecionado === "2000-2010"){
+        return Number(elemento[campo]) >= 2000 && Number(elemento[campo]) <= 2010
+    } else if(valorSelecionado === "depois2010"){
+        console.log(valorSelecionado)
+        return Number(elemento[campo]) > 2010
+    }else if(valorSelecionado === "todos"){
+        console.log(valorSelecionado)
+        return elemento[campo]
+    }
+} //Filtro pelo ano está correto
+
+function filtroUniversal(array, campo, valor){
+    const valorSelecionado = valor.toLowerCase()
+    console.log(valorSelecionado)
+    return array.filter((elemento)=>{
+        if(campo === "ano"){
+            return anoSelecionado(valorSelecionado, elemento, campo)
+        }else{
+            return valorSelecionado === "todos" || (elemento[campo].toLowerCase()).includes(valorSelecionado)
+        }
+        
+    })
+}
+
+function filtroFilmes(){
+    let filmesFiltrados = ""
+    filmesFiltrados = filtroUniversal(filmes, "titulo", buscaTitulo.value.toLowerCase())
+    filmesFiltrados = filtroUniversal(filmesFiltrados, "ano", ano.value.toLowerCase())
+    mostrarFilmes({array: filmesFiltrados, localExposicao: listaFilmes})
+}
+
+aplicarFiltros.addEventListener("click", filtroFilmes)
