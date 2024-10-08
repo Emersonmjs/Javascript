@@ -117,6 +117,15 @@ function ordemDaEscolha(array, campo, valor){
     })
 }
 
+function salvarPreferencias(){
+    localStorage.setItem("titulo", buscaTitulo.value)
+    localStorage.setItem("genero", genero.value)
+    localStorage.setItem("classificacao", classificacao.value)
+    localStorage.setItem("ano", ano.value)
+    localStorage.setItem("ordenarPor", ordenarPor.value)
+    localStorage.setItem("ordem", ordem.value)
+}
+
 function filtroFilmes(){
     let filmesFiltrados = ""
     filmesFiltrados = filtroUniversal(filmes, "titulo", buscaTitulo.value.toLowerCase())
@@ -125,6 +134,32 @@ function filtroFilmes(){
     filmesFiltrados = filtroUniversal(filmesFiltrados, "ano", ano.value.toLowerCase())
     filmesFiltrados = ordemDaEscolha(filmesFiltrados, ordenarPor.value.toLowerCase(), ordem.value.toLowerCase())
     mostrarFilmes({array: filmesFiltrados, localExposicao: listaFilmes})
+    salvarPreferencias()
 }
 
+function restaurarPreferencias(){
+    if(localStorage.getItem("titulo")){
+        buscaTitulo.value = localStorage.getItem("titulo")
+    }
+    if(localStorage.getItem("genero")){
+        genero.value = localStorage.getItem("genero")
+    }
+    if(localStorage.getItem("classificacao")){
+        classificacao.value = localStorage.getItem("classificacao")
+    }
+    if(localStorage.getItem("ano")){
+        ano.value = localStorage.getItem("ano")
+    }
+    if(localStorage.getItem("ordenarPor")){
+        ordenarPor.value = localStorage.getItem("ordenarPor")
+    }
+    if(localStorage.getItem("ordem")){
+        ordem.value = localStorage.getItem("ordem")
+    }
+    filtroFilmes()
+}
+
+
 aplicarFiltros.addEventListener("click", filtroFilmes)
+
+restaurarPreferencias()
